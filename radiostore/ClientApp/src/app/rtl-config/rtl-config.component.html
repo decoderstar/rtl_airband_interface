@@ -1,0 +1,39 @@
+<p>Configure the configuration for rtl_airband</p>
+
+
+<p>Just showing how it should be.</p>
+
+<p>Current app state: </p>
+
+
+
+<div [ngStyle]="AppActive && {'color': 'green'}  ">
+
+  <div *ngIf="AppActive; else elseBlock">RTL_AIRBAND is running.</div>
+  <ng-template #elseBlock>Rtl_airband is not running.</ng-template>
+
+</div>
+
+
+
+
+<button type="button">Start</button>
+<button type="button">Stop</button>
+<button type="button">Reset</button>
+
+
+
+
+<button type="button" (click)="updateName()">Update Name</button>
+
+
+<button type="button">Submit button</button>
+
+
+
+
+<h3>Channels here (Perhaps as a list ?)</h3>
+
+
+
+
