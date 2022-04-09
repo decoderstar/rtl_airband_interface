@@ -71,7 +71,8 @@ namespace radiostore.Controllers
         public string GetConfig()
         {
             Console.WriteLine("Test");
-            RTLAirbandConfigManager.LoadFile();
+            //RTLAirbandConfigManager.LoadFile();
+            //RTLAirbandConfigManager.LoadAlexFile();
             return "Done";
         }
 

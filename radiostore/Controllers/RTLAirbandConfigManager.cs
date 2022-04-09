@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,7 +19,19 @@ namespace radiostore
 
     public static class RTLAirbandConfigManager
     {
-
+        /*public static readonly char[] validNumbers =
+        {
+            '0',
+            '1',
+            '2',
+            '3',
+            '4',
+            '5',
+            '6',
+            '7',
+            '8',
+            '9'
+        };*/
 
         public static string DeviceType { get; set; }
 
@@ -41,6 +54,131 @@ namespace radiostore
         {
             return Input.Split("\"");
         }
+
+        /*public static void LoadAlexFile()
+        {
+            if (!File.Exists("config.cfg"))
+            {
+                SaveFile("config.cfg");
+            }
+            
+            string cfg = File.ReadAllText("config.cfg");
+            Console.WriteLine("Reading all file lines");
+
+            int charPos = 0;
+
+            try
+            {
+                while (true)
+                {
+                    //Handles # comments
+                    if (cfg[charPos] == '#')
+                    {
+                        do
+                        {
+                            charPos++;
+                        } while (cfg[charPos] != '\r' && cfg[charPos] != '\n');
+
+                        if (cfg[charPos + 1] == '\n') charPos++;
+                    }
+
+                    //Handles // comments
+                    if (cfg[charPos] == '/' && cfg[charPos + 1] == '/')
+                    {
+                        charPos++;
+
+                        do
+                        {
+                            charPos++;
+                        } while (cfg[charPos] != '\r' && cfg[charPos] != '\n');
+
+                        if (cfg[charPos + 1] == '\n') charPos++;
+                    }
+
+                    //Handles / ** / comments
+                    if (cfg[charPos] == '/' && cfg[charPos + 1] == '*')
+                    {
+                        charPos++;
+
+                        do
+                        {
+                            charPos++;
+                        } while (cfg[charPos] != '*' && cfg[charPos + 1] != '/');
+
+                        charPos++;
+                    }
+
+                    //Skip whitespace
+                    if (cfg[charPos] is ' ' or '\t' or '\r' or '\n')
+                    {
+                        charPos++;
+                        continue;
+                    }
+
+                    //Start reading variable name
+                    while (true)
+                    {
+                        string variableName = "";
+                        
+                        //Skip whitespace
+                        if (cfg[charPos] is ' ' or '\t' or '\r' or '\n')
+                        {
+                            charPos++;
+                            continue;
+                        }
+
+                        //Capture end of variable name
+                        if (cfg[charPos] is ':' or '=')
+                        {
+                            charPos++;
+
+                            while (true)
+                            {
+                                //Skip whitespace
+                                if (cfg[charPos] is ' ' or '\t' or '\r' or '\n')
+                                {
+                                    charPos++;
+                                    continue;
+                                }   
+                                
+                                //Start interpreting variable contents
+                                if (cfg[charPos] == '(')
+                                {
+                                    //Start interpreting list
+                                }
+
+                                if (cfg[charPos] == '{')
+                                {
+                                    //Start interpreting group
+                                }
+
+                                if (cfg[charPos] == '"')
+                                {
+                                    //Start interpreting string
+                                }
+                                
+                                if (cfg[charPos] == '-' || int.TryParse(cfg[charPos].ToString(), out int _))
+                                {
+                                    //Start interpreting number
+                                }
+                            }
+
+                            break; //Break out of variable interpretation to move on to next variable
+                        }
+
+                        //Capture variable character
+                        variableName += cfg[charPos];
+                        charPos++;
+                    }
+                    
+                    
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+                throw new Exception($"Failed to parse config file near character {charPos}");
+            }
+        }*/
 
         public static  void LoadFile()
         {
@@ -127,11 +265,11 @@ namespace radiostore
 
             ConfigString.AppendLine("devices: ({   ");
             ConfigString.AppendLine("type = \"" + DeviceType + "\"");
-            ConfigString.AppendLine("gain = " + RFGain.ToString());
+            ConfigString.AppendLine("gain = " + RFGain);
             ConfigString.AppendLine("mode =  \"" + Mode + "\"");
             ConfigString.AppendLine("index = " + DeviceIndex);
-            ConfigString.AppendLine("centerfreq = " + CentreFrequency.ToString());
-            ConfigString.AppendLine("correction = " + Correction.ToString());
+            ConfigString.AppendLine("centerfreq = " + CentreFrequency);
+            ConfigString.AppendLine("correction = " + Correction);
 
             if (Channels.Count > 0)
             {
