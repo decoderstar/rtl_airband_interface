@@ -1,0 +1,30 @@
+{
+    "channels": [
+        {
+            "frequency": 446.00625,
+            "modulation": "nfm",
+            "squelch_level": 8,
+            "low_pass": 2600,
+            "high_pass": 200,
+            "file_output_list": [
+                {
+                    "file_name": "PMR_01",
+                    "directory": "/home/pi/pmr446",
+                    "continuous": false
+                }
+            ],
+            "mixer_channel_output": [
+                {
+                    "mixer_name": "mixer1",
+                    "balance": 0.0
+                }
+            ]
+        }
+    ],
+    "device_type": "rtlsdr",
+    "rf_gain": 30.0,
+    "mode": "multichannel",
+    "device_index": 0,
+    "centre_frequency": 446.101,
+    "correction": 0.0
+}

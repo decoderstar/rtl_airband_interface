@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using radiostore.Config;
 
 namespace radiostore
 {
@@ -26,6 +27,8 @@ namespace radiostore
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddSingleton(RadioStoreConfig.LoadRadioStoreConfig("radiostore.json"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

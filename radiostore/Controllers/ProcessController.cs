@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -14,28 +13,18 @@ namespace radiostore.Controllers
     [ApiController]
     public class ProcessController : ControllerBase
     {
-
-        private readonly IHostingEnvironment HostEnvironment;
-
         private readonly ILogger<ProcessController> _logger;
 
-        public ProcessController(ILogger<ProcessController> logger, IHostingEnvironment environment)
+        public ProcessController(ILogger<ProcessController> logger)
         {
-            this.HostEnvironment = environment;
             _logger = logger;
         }
 
-
-
-        
         [HttpGet]
         public string Get()
         {
-
             return "hi";
         }
-        
-
 
         [Route("{id?}")]
         public string Index(int? id)
@@ -43,42 +32,10 @@ namespace radiostore.Controllers
             return "hi " + id;
         }
 
-        
         [Route("getstate")]
         public bool GetState()
         {
             return (Process.GetProcessesByName("calculator").Length > 0);
         }
-
     }
-
-
-
-
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ConfigController : ControllerBase
-    {
-
-        [Route("saveconfig"), HttpGet]
-        public void Saveconfig()
-        {
-            RTLAirbandConfigManager.SaveFile("config.cfg");
-        }
-
-
-        [Route("GetConfig"), HttpGet]
-        public string GetConfig()
-        {
-            Console.WriteLine("Test");
-            //RTLAirbandConfigManager.LoadFile();
-            //RTLAirbandConfigManager.LoadAlexFile();
-            return "Done";
-        }
-
-
-
-    }
-
-
 }

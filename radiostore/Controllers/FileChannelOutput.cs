@@ -2,25 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace radiostore.Controllers
 {
     public class FileChannelOutput : ChannelOutputObject
     {
+        [JsonProperty("directory")]
         public string Directory { get; set; } = "";
+        
+        [JsonProperty("file_name")]
         public string FileName = "";
-        public bool Continuous { get; set; } = false;
+        
+        [JsonProperty("continuous")]
+        public bool Continuous { get; set; }
+        
         public FileChannelOutput()
         {
-            this.OutputType = "file";
+            OutputType = "file";
         }
 
         public override string ToString()
         {
             return " type = \"file\"; directory = \"" + Directory + "\"; filename_template = \"" + FileName + "\"; continuous  = " + Continuous.ToString().ToLower() + " ; ";
         }
-        
-
-
     }
 }
